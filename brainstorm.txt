@@ -1,0 +1,99 @@
+
+
+Formula.Crypto
+
+Crypto.Hashing
+Crypto.Symmetric
+Crypto.Assymetric
+Crpyto.Utils
+
+
+
+
+
+
+
+
+HasherSharp - dedicated t6o hashing ONLY
+EncoderSharp
+EncryptorSharp
+
+EndPointSecuritySharp
+
+
+EasyCryptoDotNet
+FastCrypto
+Formula.Cryptography
+  - Hasher
+  - Encoder
+  - Encryptor
+  - Signer
+
+
+Forumula.Hasher
+Formula.Encoder
+Formula.Encryptor
+
+
+
+IHashingAlgorithm
+	- Sha256HashinghAlgorithm
+	- BtreehashingAlgorithm
+	
+
+ISemmetriceEncryptor
+
+
+IStringFormatter
+	.Format(byte[]
+	-Format(string)
+
+Hasher
+  - Hash(s)
+  - HashToBytes()
+  - AppendCheckum(count = 4)
+  - VerifyChecksum(hash) ; bool
+  - MultiHash()
+
+
+hasher = new Hasher(new Sha256Hasher())
+atring hash = hasher.Hash();
+
+
+
+string hasher = Hasher.New();
+
+
+hasher = Hasher.New<Sha256Hasher>()l
+
+string s  = hasher.ToByets(b)
+		.ToString(string)
+		.ToStream();
+
+
+
+		FLUENT
+		-----
+			hasher.Hash(s).ToCustomeString();
+
+
+
+
+ var hasher = new Hasher()
+		  {
+			HashAlgorithm = new Sha256Hasher(),
+			Salt = “TEST-SALT”,
+			OutputFormatter = new StringOutputFormatter()
+		  };
+s = hasher.Hash(“aldijalksdjaljadjf”);
+
+
+CODE
+=——
+/Utils/ sealed internal helper classes
+
+
+Liteweight crypto related classes for hashing encryption c# .Net 5+. All of classes are wrappers around the .NET core implementation that directly wraps the lowest level system based encryption libraries to ensure absolute security and reliability.
+
+
+
