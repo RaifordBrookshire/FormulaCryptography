@@ -9,32 +9,27 @@ namespace Formula.Cryptography.Hashing
 {
     public class Hasher
     {
-        private IHasherAlgorithm _algorithm = null;
+        private HashAlgorithm _hashAlgorithm = null;
 
         public Sha256HasherAlgorithm Sha256HasherAlgorithm { get; set; }
 
 
-        public Hasher() : this(new Sha256HasherAlgorithm())
+        public Hasher() : this(SHA256.Create())
         {
         }
-        public Hasher(IHasherAlgorithm algorithm)
+        public Hasher(HashAlgorithm hashAlgorithm)
         {
-            _algorithm = algorithm;
-        }
+            _hashAlgorithm = hashAlgorithm; 
 
-      
-        /// <summary>
-        /// Hashes the inputString and returns the hashed results using the assigned IHasherAlgorithm.
-        /// If the Hasher was create using the default constructor the hasher will use the Sha256HasherAlgorithm by default
-        /// </summary>
-        /// <param name="inputString"></param>
-        /// <returns>the Hash string</returns>
+        }
+     
         public string Hash(string inputString)
-        { 
+        {
             byte[] inputBytes = ByteUtils.StringToBytes(inputString);
-            byte[] hashBytes = _algorithm.HashBytes(inputBytes);
+            byte[] hashBytes = _hashAlgorithm.ComputeHash(inputBytes);
             string result = ByteUtils.ToHashString(hashBytes);
             return result;
+
         }
     }
 }

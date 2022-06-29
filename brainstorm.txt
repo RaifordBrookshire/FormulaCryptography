@@ -97,3 +97,48 @@ Liteweight crypto related classes for hashing encryption c# .Net 5+. All of clas
 
 
 
+
+
+
+Bitcoin type keys
+-----------------------------------
+k = Private Key
+K = Public Key
+A = Public Address
+
+K = SHA512(k)
+A = SHA256(K)
+
+or
+
+
+
+// Generate Random Key ( one time )
+privKey = SHA512( RandomSeed + Guid.New + MD5(DateTime) + etc.)
+
+// Generate 12 Word Passphrase
+passPhrase = CreatePassphrase( privKey )
+
+// Generate pubKey
+pubKey = SHA512( privKey )
+
+// Generate Public Address
+pubAddress = SHA256( pubKey )
+
+
+
+
+
+IDEAS
+------------------------
+ new apps based using 
+	- keys (pub / priv / pairs)
+	- transactions
+	- signatures
+	- certificates
+	- hashing
+	- eliptic curves
+	- merkle trees
+	- RSA, ECDSA
+
+lots of new interesting apps can be build using this tech.

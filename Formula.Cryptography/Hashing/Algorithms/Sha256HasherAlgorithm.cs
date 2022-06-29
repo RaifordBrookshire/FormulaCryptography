@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 
 namespace Formula.Cryptography.Hashing.Algorithms
 {
+
+    [Obsolete("This is an example of how to create an older style algorithm. Today you must derive from HashAlgorithm")]
     public class Sha256HasherAlgorithm : IHasherAlgorithm
     { 
 
