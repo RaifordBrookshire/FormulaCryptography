@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A9B24E55-65EA-4FCB-80F5-A9FD3ACBC3B0}"
 	ProjectSection(SolutionItems) = preProject
 		brainstorm.txt = brainstorm.txt
+		LICENSE = LICENSE
 		readme.txt = readme.txt
 	EndProjectSection
 EndProject
