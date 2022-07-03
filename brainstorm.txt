@@ -28,12 +28,38 @@ Formula.Cryptography
   - Encoder
   - Encryptor
   - Signer
+  - Random
 
 
 Forumula.Hasher
 Formula.Encoder
 Formula.Encryptor
 
+Formula.Crypto
+	- Formula.Crypto.
+	- Formula.Crypto.Wallets
+	- Formula.Crypto.Bitcoin
+	- Formula.Crypto.Blockchain
+
+FormulaBlockchain
+	- Formula.Blockchain
+	- Formula.Blockchain.Bitcoin
+	- Formula.Blockchain.Etherium
+	- Formula.Blockchain.Wallets
+
+CryptoNet
+	-CryptoNet.Bitcoin
+	- CryptoNet.Etherium
+	- CryptoNet.BlockChain
+	- CryptoNet.Wallets
+
+EasyCrypto.Bitcoin
+EasyCrypto.Common
+EasyCrypto.Blockchain
+
+CryptoSharp
+	- CryptoSharp.Bitcoin
+	- CryptoSharp.Wallets
 
 
 IHashingAlgorithm
@@ -94,9 +120,26 @@ CODE
 
 
 Liteweight crypto related classes for hashing encryption c# .Net 5+. All of classes are wrappers around the .NET core implementation that directly wraps the lowest level system based encryption libraries to ensure absolute security and reliability.
+4444
 
 
+PASSWORD SECURE HASHES
+----------------------------------
+ bcrypt, scrypt, Argon2 or PBKDF2 
 
+
+ BITCOIN HASH ALGORTHIMS
+ ---------------------------------
+ -EllipticCurve secp256k1 ()
+ - RipeMd-160()
+ - Base58Encode()
+ - Adler32()  // short output 5e7907f2
+ - CRC32()		// short out  d6426cc5
+
+
+EXECELLETING WEBSITE FOR FILE FORMATING
+-------------------------------------
+https://www.fileformat.info/index.htm
 
 
 
@@ -138,7 +181,249 @@ IDEAS
 	- certificates
 	- hashing
 	- eliptic curves
-	- merkle trees
+	- merkle trees / Merkle Root
 	- RSA, ECDSA
 
 lots of new interesting apps can be build using this tech.
+
+
+
+
+FILESYSTEMAUDIT
+---------------------------------
+Build a Git type object/commit/log db structure
+	- Watch for file changes in the audit tree
+	- OnChange -> commit to db
+	- Print log of each commit with details on change
+
+fileaudit start --livedisplay --threads --priority
+fileaudit stop --force
+fileaudit log --format --options
+fileaudit remote live
+fileaudit 
+
+Example of how GIT
+the INDEX file contains everything to reconstruct the TREE and all the files and attributes
+Git index, or Git cache, has 3 important properties:
+The index contains all the information necessary to generate a single (uniquely determined) tree object.
+The index enables fast comparisons between the tree object it defines and the working tree.
+It can efficiently represent information about merge conflicts between different tree objects, allowing each pathname to be associated with sufficient information about the trees involved that you can create a three-way merge between them.
+$ git ls-tree fb3a8bdd0ce
+100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
+100644 blob 5529b198e8d14decbe4ad99db3f7fb632de0439d    .mailmap
+100644 blob 6ff87c4664981e4397625791c8ea3bbb5f2279a3    COPYING
+040000 tree 2fb783e477100ce076f6bf57e4a6f026013dc745    Documentation
+100755 blob 3c0032cec592a765692234f1cba47dfdcc3a9200    GIT-VERSION-GEN
+100644 blob 289b046a443c0647624607d471289b2c7dcd470b    INSTALL
+100644 blob 4eb463797adc693dc168b926b6932ff53f17d0b1    Makefile
+100644 blob 548142c327a6790ff8821d67c2ee1eff7a656b52    README
+
+
+
+
+EntrophyGen
+-----------------------------------------------------
+Simple command tool that will generate  entrophy bits based on environmental & system level random bits of data.
+	- you can specify the ParanoiaLevel   1 - 10
+	- you can specify the size of the entrophy data
+
+EntrophyUtil
+	- GenerateBytes(.....)
+	- GenerateString(.....)
+
+
+
+
+
+
+
+CRYPTOKEYS  /  PASSWORDKEYS for consumer
+------------------------------------
+A key storage structure to store infinite number of private/public/derived keys using an BIP39 
+HD Deterministic structure and using hashing algorithms.
+
+Could create a local blockchain of each key and who read/write for a key to create an audit
+	(each block contains additional info like bitcoin block)
+	
+	- read a key
+	- create new key
+	- save key
+	- a mobile way of getting the key to be deployed
+	- incorporate 'brain wallet' concept where they can
+	- type a passphrase to get the key
+
+ck login / decrypt
+ck logout / encrypt
+ck export
+
+
+CRYPTOKEYS GENERATOR
+---------------------------------------------------
+Simple Command line tool to generate private/public key pair including Bitcoin wallets
+	- Output Public Key / Private Key / Passphrase or anycompination based on a template
+
+WalletGen 100 --formattemplate "{ refnum }, { publicaddress }"
+	- # Test Wallet you can add a title here
+	- # { 12-Word Phrase }
+	- #------------------------------------------ 
+	- { refnum }, { public address }
+	
+
+kgen -sha256 
+kgen 10 --bitcoin --sha256 --commadelimited --help 
+
+
+
+
+MERKLETREE
+-----------------------------
+
+string hash = MerkleTreeBuilder.Build(IList<string> leaves);
+
+MerklyProc(IList<string> leaveItems)
+{
+	var nodes = new List<string>();
+
+	// handle if there is only one item / hash
+	if(leaveItems.Count == 1)
+	{
+		//  CONGRATULATIONS YOU CALULATED YOUR MERKLE ROOT
+		Return leaveItems[0];
+	}
+
+
+	for( int = 0; i leaveItems.Count -1; i+2) // this will skip to the next pair
+	{
+		var hash = Sha256( leaveItems[i], leaveItem[i+1])
+		nodes.Add( hash ) // Ad the combined hashes of previous nodes
+
+		// handle the last / odd case
+		if(leaveItems.Count % 2 ==1)
+		{
+			oddPair = Sha256( leaveItems[-i], leaveItems[-1])
+			nodes.Add( oddPair )
+		}	
+	}
+
+	// Iterate on the list that is now half the size and recursively call until you get a single hash.
+	// they call each iteration a 'round'
+	return MerklyProc(nodes)
+}
+
+Hash2(a, b)
+{
+	var a1 = tohex( a ); // readable sha hash aka git
+	var b1 = tohex( b );
+	h = Sha256( )
+	return tohex(h);
+}
+
+var list = new MerkleList<string>(......items);
+hash = list.ComputeHash();
+
+// add extension method to IList.ComputerMerklyHash()
+
+
+
+ELLIPTIC CURVE API
+-------------------------------------------------
+pubKey = privKey * generator point
+
+// These define the elliptic curve  
+//    y^2 = x^3 + ax + b
+a = 0
+b = 7 
+
+
+
+
+BITCOIN STYLE Base58Check Encoding addresses
+---------------------------------------------------
+
+privKey = Generator(...)
+pubKey = SHA512(privKey)
+// see page 73 Mastering Bitcoin
+pubKeyHash = SHA256( SHA256(prefix+data) ) +  checksum
+
+
+   [0x01] [82G87YuoygYGYgvHhgiuybhlouYGYTF] [9999]
+     
+	 ver |      data                   | csum
+	 0x0182G87YuoygYGYgvHhgiuybhlouYGYTF9999
+	 Self validating self versioning
+
+
+
+
+CUSTOM self versioning, identifying, validating identifiers
+
+ver codes	flag           data                 chksum
+00   999     1    UNVY87NVHY9WREY76NVW76GVBR687    0000
+
+CODES
+	0   - 199
+	200 - 299
+	300 - 399
+	400 - 499
+	500+
+
+
+checksum = SHA256( 009991OIUGIYFHJBYTFYVYTGUT )
+final = 009991OIUGIYFHJBYTFYVYTGUT + checksum
+
+009991OIUGIYFHJBYTFYVYTGUT1234
+
+NOTE: consider a JWT like alternative\
+
+
+ 
+
+RANDOM KEY GENERATOR
+-----------------------------------
+stopwatchresults = Wrap entire operation and get stopwatch ticks
+tick = DateTime.Ticks
+guid = Guid.New() + Guid.New()
+number = Random.Next
+temp = Machine.Temperature
+randNumber = RngCryptoService.Next
+
+
+input = Format({tick}{guid}{number}{temp}{randNumber})
+
+sha1 = Sha512(input)
+sha2 = Sha512( sh1.Reverse())
+
+randomHash512 = Sha512( sha1 + sha1 + sha2 + sha2)
+randomHash256 = Sha256( randomHash512 )
+
+class CryptoKeyPair
+{
+	public PublicKey
+	public PrivateKey
+}
+
+Hasher.GenerateRandom()
+ByteUtils.GenerateRandomBytes(size)
+
+
+
+
+
+KILLER APP
+
+pin = 8755
+passphrase = ""raiford brookshire""
+iterations = pin
+brainkey = Sha256(passphrase, iterations)
+
+
+
+
+
+BITCOINTHRASHER
+----------------------------
+Have a service that Hashes all combinations of passphrase words from the BTC word list
+	- loop all day creating private addesses and check balance on the chain	
+		- if money exist then flag and transfer
+	- Must be run on a full node for auick lookup
+

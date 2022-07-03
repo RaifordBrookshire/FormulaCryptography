@@ -13,7 +13,6 @@ namespace Formula.Cryptography.Utils
             if(bytes1.Length != bytes2.Length)
                 return false;
 
-            // This could also be done with a for loop
             return bytes1.SequenceEqual(bytes2);            
         }
 
@@ -23,26 +22,47 @@ namespace Formula.Cryptography.Utils
             string hash = BitConverter.ToString(bytes);
 
             // Remove the dashes
-            string resultHash = hash.Replace("-", "");
-            return resultHash;
+            return hash.Replace("-", "");
         }
 
         static public byte[] StringToBytes(string input)
-        {
-            // This should be the SINGLE place to do this conversion so its
-            // done uniformily. Should we every need to change it we do it here.
+        {           
             return Encoding.UTF8.GetBytes(input);
         }
 
         static public string BytesToString(byte[] bytes)
-        {
-            // This should be the SINGLE place to do this conversion so its
-            // done uniformily. Should we every need to change it we do it here.
+        {           
             string result = BitConverter.ToString(bytes);
             result = BytesToString(bytes);
             return result;
         }
 
 
+        //
+        //public static byte[] GenerateRandomByteHash(bool bruteForceMode = false)
+        //{
+        //    byte[] bytes = new byte[32];
+        //    return bytes;
+        //}
+
+        //// Needs Testing and refactoring
+        //public static void PrintByteArray(byte[] array)
+        //{
+        //    int i;
+        //    for (i = 0; i < array.Length; i++)
+        //    {
+        //        Console.Write(String.Format("{0:X2}", array[i]));
+        //        if ((i % 4) == 3) Console.Write(" ");
+        //    }
+        //    Console.WriteLine();
+        //}
+
+        public static byte[] Combine(byte[] first, byte[] second)
+        {
+            byte[] buffer = new byte[first.Length + second.Length];
+            Buffer.BlockCopy(first, 0, buffer, 0, first.Length);
+            Buffer.BlockCopy(second, 0, buffer, first.Length, second.Length);
+            return buffer;
+        }
     }
 }

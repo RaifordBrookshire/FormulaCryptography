@@ -11,25 +11,26 @@ namespace Formula.Cryptography.Hashing
     {
         private HashAlgorithm _hashAlgorithm = null;
 
-        public Sha256HasherAlgorithm Sha256HasherAlgorithm { get; set; }
-
-
         public Hasher() : this(SHA256.Create())
         {
         }
         public Hasher(HashAlgorithm hashAlgorithm)
         {
             _hashAlgorithm = hashAlgorithm; 
-
         }
      
         public string Hash(string inputString)
         {
             byte[] inputBytes = ByteUtils.StringToBytes(inputString);
-            byte[] hashBytes = _hashAlgorithm.ComputeHash(inputBytes);
+            byte[] hashBytes = HashBytes(inputBytes);
             string result = ByteUtils.ToHashString(hashBytes);
             return result;
+        }
 
+        public byte[] HashBytes(byte[] bytes)
+        {
+            byte[] hashBytes = _hashAlgorithm.ComputeHash(bytes);
+            return hashBytes;
         }
     }
 }
