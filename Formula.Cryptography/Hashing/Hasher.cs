@@ -21,9 +21,9 @@ namespace Formula.Cryptography.Hashing
      
         public string Hash(string inputString)
         {
-            byte[] inputBytes = ByteUtils.StringToBytes(inputString);
+            byte[] inputBytes = CryptoUtils.StringToBytes(inputString);
             byte[] hashBytes = HashBytes(inputBytes);
-            string result = ByteUtils.ToHashString(hashBytes);
+            string result = CryptoUtils.ToHashString(hashBytes);
             return result;
         }
 
