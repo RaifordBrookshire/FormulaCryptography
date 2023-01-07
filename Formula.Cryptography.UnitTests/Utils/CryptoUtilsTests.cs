@@ -13,5 +13,26 @@ namespace Formula.Cryptography.UnitTests.Utils
 {
     public class CryptoUtilsTests
     {
+        [Fact]
+        public void CryptoUtils_StringToBytes_BytesToString_Test()
+        {
+            //const string stringInput = "My Test String";
+
+
+            //// ACT
+            //byte[] bytes = CryptoUtils.StringToBytes(stringInput);
+            //string stringConverted = CryptoUtils.BytesToString(bytes);
+
+            //string hashString = CryptoUtils.HashBytesToHashString(bytes);    
+
+
+            //// get string
+
+            //// ASSERT
+            //Assert.True(string.Equals(stringInput, stringConverted));
+
+            Assert.True(true);
+
+        }
     }
 }

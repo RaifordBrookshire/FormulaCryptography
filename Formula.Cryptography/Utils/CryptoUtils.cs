@@ -19,6 +19,8 @@ namespace Formula.Cryptography.Utils
             random.GetBytes(byteBuffer);
             return byteBuffer;
         }
+		
+
 		public static byte[] StringToBytes(string text)
 		{
 			byte[] bytes = Encoding.UTF8.GetBytes(text);
@@ -27,21 +29,12 @@ namespace Formula.Cryptography.Utils
 
 		public static string BytesToString(byte[] bytes)
 		{
-			string text = Encoding.UTF8.GetString(bytes); ;
-			return text;
+			return BitConverter.ToString(bytes);
 		}
-		static public string ToHashString(byte[] bytes)
+		static public string HashBytesToHashString(byte[] bytes)
 		{
-			// Convert bytes to string. NOTE: the string will contain dashes whihich we wil remove
-			string hash = BitConverter.ToString(bytes);
-			
-			// Clean up format to no dashes and lowercase as default most systems like Git all use lower case.
-			// This is important since the case will change the output
-			hash = hash.ToLower();
-			hash = hash.Replace("-", "");
-
-			// Remove the dashes
-			return hash;
+			string hash = BytesToString(bytes);
+			return hash.ToLower().Replace("-", "");
 		}
 
 	}

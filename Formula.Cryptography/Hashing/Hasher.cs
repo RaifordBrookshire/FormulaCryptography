@@ -23,7 +23,7 @@ namespace Formula.Cryptography.Hashing
         {
             byte[] inputBytes = CryptoUtils.StringToBytes(inputString);
             byte[] hashBytes = HashBytes(inputBytes);
-            string result = CryptoUtils.ToHashString(hashBytes);
+            string result = CryptoUtils.HashBytesToHashString(hashBytes);
             return result;
         }
 

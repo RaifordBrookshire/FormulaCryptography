@@ -2,16 +2,43 @@
 
 using Formula.Cryptography.Hashing;
 using Formula.Cryptography.Hashing.Algorithms;
+using Formula.Cryptography.Utils;
 using System;
 using System.Security.Cryptography;
 using Xunit;
 
 namespace Formula.Cryptography.UnitTests.Hashing
 {
-    public class HasherTests
+    public class HasherTests : TestBase
     {
-     
-        [Fact]
+
+		[Fact]
+		public void Usage_Examples()
+		{
+			byte[] bytes = CryptoUtils.GetRandomBytes(100000);
+			string hash = "";
+			byte[] hash2;
+			
+			Hasher hasher = new Hasher();  // Default: SHA256
+			hash = hasher.Hash("Important Message");
+			hash2 = hasher.HashBytes(bytes);
+
+			Hasher hasher512 = new Hasher(SHA512.Create());
+			hash = hasher.Hash("Important Message");
+			hash2 = hasher512.HashBytes(bytes);
+
+			hasher = new Hasher(SHA1.Create());
+			hash = hasher.Hash("Important Message", 1000); //  Will hash and rehash 1000 times.
+			hash = hasher.Hash("Important Message", "Secret Salt"); //  Add some salt to the mix!
+
+			////////////////////////////////////
+			///   THATS IT SIMPLE & SWEET   ///
+			////////////////////////////////////
+
+
+		}
+
+		[Fact]
         public void Hasher_Basic_Usage()
         {         
             // ARRANGE

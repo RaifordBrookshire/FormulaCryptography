@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>Hashing made consistent and EASY! Has several convenience including 
+
+ - Hash multiple iterations to create ultra secure hashes.
+ - Write Custom algorithms for 100% Customization
+ - Integrates just create the class and GO... simple and sweet
+ - Ultra Light Weight &amp; super simple source code
+
+Compiled to .NET Standard 2.1 so .NET 3.1 or greater.
+</Description>
   </PropertyGroup>
 
 </Project>
