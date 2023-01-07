@@ -34,9 +34,14 @@ namespace Formula.Cryptography.Utils
 		{
 			// Convert bytes to string. NOTE: the string will contain dashes whihich we wil remove
 			string hash = BitConverter.ToString(bytes);
+			
+			// Clean up format to no dashes and lowercase as default most systems like Git all use lower case.
+			// This is important since the case will change the output
+			hash = hash.ToLower();
+			hash = hash.Replace("-", "");
 
 			// Remove the dashes
-			return hash.Replace("-", "");
+			return hash;
 		}
 
 	}
