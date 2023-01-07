@@ -25,6 +25,7 @@ namespace Formula.Cryptography.UnitTests.Hashing
 
 			Hasher hasher512 = new Hasher(SHA512.Create());
 			hash = hasher.Hash("Important Message");
+
 			hash2 = hasher512.HashBytes(bytes);
 
 			hasher = new Hasher(SHA1.Create());
@@ -33,9 +34,8 @@ namespace Formula.Cryptography.UnitTests.Hashing
 
 			////////////////////////////////////
 			///   THATS IT SIMPLE & SWEET   ///
+
 			////////////////////////////////////
-
-
 		}
 
 		[Fact]
