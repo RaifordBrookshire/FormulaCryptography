@@ -1,4 +1,5 @@
 ﻿using Formula.Cryptography.Hashing;
+using Formula.Cryptography.Hashing.Algorithms;
 using Formula.Cryptography.Utils;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,36 @@ namespace Formula.Cryptography.UnitTests.Hashing
 			int index = hasher.Hash("Some Data", 5); // Return a value from 0-4
 
 		}
+
+		[Fact]
+		public void SwapAlgorithms_PerformanceMeasure()
+		{
+			int iterations = 10;
+			int slotCount = 5;
+			int min = 10;
+			int max = 20;
+			var input = "My Input Text";
+			int index = 0;
+			byte[] bytes = CryptoUtils.GetRandomBytes(100);
+			int loopCounter = 0;
+			List<int> hashList = new List<int>();
+			
+			MapHasher hasher = new MapHasher(new FnvMapHashAlgorithm());
+
+			for (int i = 0; i < iterations; i++)
+			{
+				loopCounter++;
+				var inputString = $"{input}{i}";
+				index = hasher.Hash(input + i, min, max);
+				hashList.Add(index);
+				Trace.WriteLine($"Input:{inputString}       Index:{index}");
+			}
+
+			Assert.True(loopCounter == iterations);
+			Assert.All(hashList, i => Assert.InRange(i, min, max));
+		}
+
+
 
 		[Fact]
 		public void HashBytes_Iterate_Verify_Ranges()
